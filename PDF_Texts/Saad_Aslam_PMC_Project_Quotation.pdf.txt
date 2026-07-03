@@ -1,0 +1,41 @@
+SAAD ASLAM  |  PROJECT QUOTATION
+PREPARED BY: PREPARED FOR:
+Saad Aslam PMC
+Independent Software Engineer & Developer
+Email: saadaslam.graphics@gmail.com
+Quotation Reference: QT-2026-SA01
+Valid Until: June 23, 2026
+Detailed Breakdown of Deliverables (What I Offer):
+S# Module & Project Scope Specification Total Cost
+1PMC Web Development Scope 
+• Homepage: Banner, Background, Who We Are (stats), Sales & Distribution, 
+Warehousing/Fleet overviews, In-house brands, and Footer.
+• Services: Individual pages with descriptions, stats, and images for Distribution, 
+Warehousing, Fleet Management, and In-house Brands.
+• Products: Catalog layout featuring categorized product items and specifications.
+• About Us: Corporate profile featuring family legacy, historical timeline, and image 
+galleries.
+• Team: Dedicated grid featuring individual member profiles and photos.
+• Distribution Network: Vendor product listing page equipped with search filters.
+• Contact: Contact form, map integration, address, and direct phone links.PKR 90,000
+2Back-Office Portal 
+• Back-Office Admin Portal: Secure administrative web application enabling your 
+staff to create, read, update, and remove backend data models (vendors, items, 
+content cards) instantly without updating application codebase.Included in Bundle
+3System & Backend 
+• Database design for products, vendors, users, and content modules
+• Secure API layer for frontend-backend communication
+• AuthenticationIncluded in Bundle
+3Additional 
+• Fully responsive design (mobile, tablet, desktop)
+• SEO-friendly structure
+• Performance optimizationIncluded in Bundle
+Total Quote Amount (PKR): PKR 90,000
+Milestone Payment Structure:
+M1 (35%) Progress Payment (Due after delivering initial website layout / design progress update)PKR 31,500
+M2 (65%) Final Handover Payment (Due upon completion)PKR 58,500
+Terms & Infrastructure Requirements:
+1. Domain & Server Infrastructure: Registration, hosting procurement, and live server panels must be provided entirely 
+by the client.
+2. Scope Containment: Any additions or operational variations requested beyond the documented modules above will 
+be billed as separate items.
