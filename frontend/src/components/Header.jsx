@@ -17,32 +17,37 @@ const Header = () => {
   const navItems = ['Home', 'About Us', 'Services', 'Products', 'Contact'];
 
   return (
-    <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white/95 backdrop-blur-lg shadow-md py-3' : 'bg-white py-4 md:py-5 border-b border-slate-100'}`}>
-      <div className="container mx-auto px-6 flex justify-between items-center">
-        {/* Logo */}
-        <Link to="/" className="flex items-center gap-3 transition-opacity hover:opacity-80 z-50">
-          <img src="/assets/logo.png" alt="PMC Logo" className="h-10 md:h-12 w-auto object-contain" />
-          <div className="text-xl md:text-2xl font-extrabold text-[#0b2046] tracking-tight">
-            PMC <span className="text-[#f7a800]">Imports</span>
-          </div>
-        </Link>
+    <>
+      {/* Premium Gradient Top Bar */}
+      <div className="fixed top-0 w-full h-1.5 bg-gradient-to-r from-[#0b2046] via-[#f7a800] to-[#0b2046] z-[60]"></div>
+      
+      <div className="fixed top-1.5 left-0 w-full z-50 flex justify-center pointer-events-none">
+        <header className={`pointer-events-auto w-full transition-all duration-500 ease-[cubic-bezier(0.2,0.8,0.2,1)] ${isScrolled ? 'max-w-7xl rounded-2xl bg-white/95 backdrop-blur-xl shadow-[0_8px_30px_rgba(0,0,0,0.12)] border border-slate-200/60 mt-2 py-2 mx-4' : 'max-w-full rounded-none bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-200/50 mt-0 py-4 mx-0'}`}>
+          <div className="w-full max-w-7xl mx-auto px-6 flex justify-between items-center">
+            {/* Logo */}
+          <Link to="/" className="flex items-center gap-1.5 transition-transform duration-300 hover:scale-[1.02] z-50 group">
+            <img src="/assets/logo.png" alt="PMC Logo" className="h-12 md:h-16 w-auto object-contain filter drop-shadow-sm group-hover:drop-shadow-md transition-all" />
+            <div className="text-2xl md:text-3xl font-black text-[#0b2046] tracking-tight">
+              PMC <span className="text-[#f7a800]">Imports</span>
+            </div>
+          </Link>
         
-        {/* Desktop Nav */}
-        <nav className="hidden lg:block">
-          <ul className="flex items-center gap-8">
-            {navItems.map((item) => (
-              <li key={item}>
-                <Link 
-                  to={item === 'Home' ? '/' : item === 'About Us' ? '/about' : `/${item.toLowerCase().replace(' ', '')}`} 
-                  className="text-slate-600 hover:text-[#f7a800] font-semibold text-sm uppercase tracking-wider transition-colors relative group"
-                >
-                  {item}
-                  <span className="absolute -bottom-2 left-0 w-0 h-0.5 bg-[#f7a800] transition-all duration-300 group-hover:w-full"></span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
+          {/* Desktop Nav */}
+          <nav className="hidden lg:block">
+            <ul className="flex items-center gap-8">
+              {navItems.map((item) => (
+                <li key={item}>
+                  <Link 
+                    to={item === 'Home' ? '/' : item === 'About Us' ? '/about' : `/${item.toLowerCase().replace(' ', '')}`} 
+                    className="text-[#0b2046] hover:text-[#f7a800] font-bold text-sm uppercase tracking-widest transition-colors relative group"
+                  >
+                    {item}
+                    <span className="absolute -bottom-2 left-0 w-0 h-0.5 bg-[#f7a800] transition-all duration-300 group-hover:w-full"></span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
 
         {/* Mobile Menu Toggle */}
         <button 
@@ -68,8 +73,10 @@ const Header = () => {
             ))}
           </ul>
         </div>
+          </div>
+        </header>
       </div>
-    </header>
+    </>
   );
 };
 

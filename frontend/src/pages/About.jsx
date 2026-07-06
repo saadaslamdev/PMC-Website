@@ -214,16 +214,19 @@ const About = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
             {[
-              { company: 'The Premier Group', years: '1986 – 1989', role: 'Specialized in daily sales reporting, bill inspections, and inventory management.', skills: 'Gained proficiency in cashiering and corporate accounting.' },
-              { company: 'Colgate Palmolive', years: '1989 – 1991', role: 'Advanced from Sales Representative to District Sales Executive.', skills: 'Oversaw the Southern region, covering Sindh, Karachi, and Balochistan.' },
-              { company: 'Habib Oil Mills', years: '1991 – 1993', role: 'Promoted from Sales Supervisor to Field Manager.', skills: 'Managed field operations and supply chain activities in major provincial centers.' }
+              { company: 'The Premier Group', logo: '/assets/Premier-Group-Logo.png', years: '1986 – 1989', role: 'Specialized in daily sales reporting, bill inspections, and inventory management.', skills: 'Gained proficiency in cashiering and corporate accounting.' },
+              { company: 'Colgate Palmolive', logo: '/assets/Colgate-Palmolive-Logo.png', years: '1989 – 1991', role: 'Advanced from Sales Representative to District Sales Executive.', skills: 'Oversaw the Southern region, covering Sindh, Karachi, and Balochistan.' },
+              { company: 'Habib Oil Mills', logo: '/assets/HOM-Logo-.png', years: '1991 – 1993', role: 'Promoted from Sales Supervisor to Field Manager.', skills: 'Managed field operations and supply chain activities in major provincial centers.' }
             ].map((item, idx) => (
-              <div key={idx} className="bg-slate-50 rounded-2xl p-8 shadow-xl border border-slate-100 hover:-translate-y-2 transition-transform duration-300">
-                <div className="text-[#f7a800] font-bold text-sm tracking-widest mb-2">{item.years}</div>
-                <h4 className="text-2xl font-black text-[#0b2046] mb-4">{item.company}</h4>
+              <div key={idx} className="bg-slate-50 rounded-2xl p-8 shadow-xl border border-slate-100 hover:-translate-y-2 transition-transform duration-300 flex flex-col h-full">
+                <div className="flex items-start justify-between mb-6 gap-4">
+                  <div className="text-[#f7a800] font-bold text-sm tracking-widest mt-2">{item.years}</div>
+                  <img src={item.logo} alt={item.company} className="h-20 w-auto max-w-[140px] object-contain object-right mix-blend-multiply" />
+                </div>
+                <h4 className="text-2xl md:text-3xl font-black text-[#0b2046] leading-tight mb-4">{item.company}</h4>
                 <div className="w-12 h-1 bg-slate-200 mb-6"></div>
                 <p className="text-slate-700 font-medium mb-3">{item.role}</p>
-                <p className="text-slate-500 text-sm">{item.skills}</p>
+                <p className="text-slate-500 text-sm mt-auto">{item.skills}</p>
               </div>
             ))}
           </div>

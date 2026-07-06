@@ -6,7 +6,16 @@ const brands = [
   { name: 'Sunder Food', src: '/assets/Partner-Brand-Logos/Sunder-Logo.png' },
   { name: 'Daani International', src: '/assets/Partner-Brand-Logos/Daani-Logo.jpg' },
   { name: 'Frooto Juice', src: '/assets/Partner-Brand-Logos/Frooto-Logo.png' },
-  { name: 'M&A International', src: '/assets/Partner-Brand-Logos/MA-International-Logo.png' }
+  { name: 'M&A International', src: '/assets/Partner-Brand-Logos/MA-International-Logo.png' },
+  { name: 'Ambala', src: '/assets/Partner-Brand-Logos/Ambala-Logo.png' },
+  { name: 'Honest', src: '/assets/Partner-Brand-Logos/Honest-Logo.png' },
+  { name: 'Naseem', src: '/assets/Partner-Brand-Logos/Naseem-Logo.png' },
+  { name: 'Nurpur', src: '/assets/Partner-Brand-Logos/Nurpur-Logo.png' },
+  { name: 'Olivia', src: '/assets/Partner-Brand-Logos/Olivia-Logo.png' },
+  { name: 'SixB', src: '/assets/Partner-Brand-Logos/SixB-Logo.png' },
+  { name: 'Memon Brothers', src: '/assets/Partner-Brand-Logos/Memon-Brothers-Logo.png' },
+  { name: 'Janat-e-Sheeren', src: '/assets/Partner-Brand-Logos/Jannat-e-Sheeren-Logo.png' },
+  { name: 'Royal Classic Crockery', src: '/assets/Partner-Brand-Logos/Royal-Classic-Crockery-Logo.png' }
 ];
 
 const BrandsMarquee = () => {
