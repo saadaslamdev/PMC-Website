@@ -1,7 +1,54 @@
-import React from 'react';
-import { FiMapPin, FiPhone, FiMail, FiClock, FiSend } from 'react-icons/fi';
+import React, { useState } from 'react';
+import { FiMapPin, FiPhone, FiMail, FiClock, FiSend, FiCheckCircle, FiAlertCircle } from 'react-icons/fi';
+import { supabase } from '../supabaseClient';
 
 const Contact = () => {
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    company: '',
+    subject: '',
+    message: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+
+    const { error } = await supabase
+      .from('contact_inquiries')
+      .insert([
+        { 
+          first_name: formData.firstName, 
+          last_name: formData.lastName, 
+          email: formData.email, 
+          phone: formData.phone, 
+          company: formData.company, 
+          subject: formData.subject, 
+          message: formData.message 
+        }
+      ]);
+
+    setIsSubmitting(false);
+
+    if (error) {
+      console.error('Error submitting contact form:', JSON.stringify(error, null, 2));
+      setSubmitStatus('error');
+    } else {
+      setSubmitStatus('success');
+      setFormData({ firstName: '', lastName: '', email: '', phone: '', company: '', subject: '', message: '' });
+      setTimeout(() => setSubmitStatus(null), 5000);
+    }
+  };
   return (
     <div className="pt-20">
       {/* 1. Hero Section */}
@@ -69,38 +116,51 @@ const Contact = () => {
                 <p className="text-slate-500">Fill out the form below and our logistics team will get back to you promptly.</p>
               </div>
 
-              <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+              <form className="space-y-6" onSubmit={handleSubmit}>
+                {submitStatus === 'success' && (
+                  <div className="bg-green-50 text-green-700 p-4 rounded-xl flex items-center gap-3 border border-green-200 animate-in fade-in">
+                    <FiCheckCircle className="w-5 h-5 flex-shrink-0" />
+                    <p className="font-medium">Thank you! Your inquiry has been sent. Our team will contact you shortly.</p>
+                  </div>
+                )}
+                {submitStatus === 'error' && (
+                  <div className="bg-red-50 text-red-700 p-4 rounded-xl flex items-center gap-3 border border-red-200 animate-in fade-in">
+                    <FiAlertCircle className="w-5 h-5 flex-shrink-0" />
+                    <p className="font-medium">Oops! Something went wrong. Please try again later.</p>
+                  </div>
+                )}
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-sm font-bold text-slate-700 mb-2">First Name *</label>
-                    <input type="text" className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0b2046]/20 focus:border-[#0b2046] transition-all" placeholder="John" required />
+                    <input type="text" name="firstName" value={formData.firstName} onChange={handleChange} className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0b2046]/20 focus:border-[#0b2046] transition-all" placeholder="John" required />
                   </div>
                   <div>
                     <label className="block text-sm font-bold text-slate-700 mb-2">Last Name *</label>
-                    <input type="text" className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0b2046]/20 focus:border-[#0b2046] transition-all" placeholder="Doe" required />
+                    <input type="text" name="lastName" value={formData.lastName} onChange={handleChange} className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0b2046]/20 focus:border-[#0b2046] transition-all" placeholder="Doe" required />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-sm font-bold text-slate-700 mb-2">Email Address *</label>
-                    <input type="email" className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0b2046]/20 focus:border-[#0b2046] transition-all" placeholder="john@company.com" required />
+                    <input type="email" name="email" value={formData.email} onChange={handleChange} className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0b2046]/20 focus:border-[#0b2046] transition-all" placeholder="john@company.com" required />
                   </div>
                   <div>
                     <label className="block text-sm font-bold text-slate-700 mb-2">Phone Number</label>
-                    <input type="tel" className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0b2046]/20 focus:border-[#0b2046] transition-all" placeholder="+1 (555) 000-0000" />
+                    <input type="tel" name="phone" value={formData.phone} onChange={handleChange} className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0b2046]/20 focus:border-[#0b2046] transition-all" placeholder="+1 (555) 000-0000" />
                   </div>
                 </div>
 
                 <div>
                   <label className="block text-sm font-bold text-slate-700 mb-2">Company / Organization</label>
-                  <input type="text" className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0b2046]/20 focus:border-[#0b2046] transition-all" placeholder="Your Business Name" />
+                  <input type="text" name="company" value={formData.company} onChange={handleChange} className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0b2046]/20 focus:border-[#0b2046] transition-all" placeholder="Your Business Name" />
                 </div>
 
                 <div>
                   <label className="block text-sm font-bold text-slate-700 mb-2">Subject *</label>
-                  <select className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0b2046]/20 focus:border-[#0b2046] transition-all text-slate-700 cursor-pointer" required>
-                    <option value="" disabled selected>Select an inquiry type...</option>
+                  <select name="subject" value={formData.subject} onChange={handleChange} className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0b2046]/20 focus:border-[#0b2046] transition-all text-slate-700 cursor-pointer" required>
+                    <option value="" disabled>Select an inquiry type...</option>
                     <option value="brand">Brand Representation</option>
                     <option value="wholesale">Wholesale Orders</option>
                     <option value="logistics">Logistics & Warehousing</option>
@@ -110,12 +170,12 @@ const Contact = () => {
 
                 <div>
                   <label className="block text-sm font-bold text-slate-700 mb-2">Message *</label>
-                  <textarea rows="5" className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0b2046]/20 focus:border-[#0b2046] transition-all resize-none" placeholder="How can we help you?" required></textarea>
+                  <textarea name="message" value={formData.message} onChange={handleChange} rows="5" className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0b2046]/20 focus:border-[#0b2046] transition-all resize-none" placeholder="How can we help you?" required></textarea>
                 </div>
 
-                <button type="submit" className="w-full bg-[#f7a800] hover:bg-[#e69c00] text-[#0b2046] font-bold text-lg py-4 px-8 rounded-xl transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl flex items-center justify-center gap-3 group">
-                  Send Message
-                  <FiSend className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                <button type="submit" disabled={isSubmitting} className="w-full bg-[#f7a800] hover:bg-[#e69c00] text-[#0b2046] font-bold text-lg py-4 px-8 rounded-xl transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl flex items-center justify-center gap-3 group disabled:opacity-70 disabled:cursor-not-allowed">
+                  {isSubmitting ? 'Sending...' : 'Send Message'}
+                  {!isSubmitting && <FiSend className="w-5 h-5 group-hover:translate-x-1 transition-transform" />}
                 </button>
               </form>
             </div>

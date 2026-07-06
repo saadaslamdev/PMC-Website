@@ -1,128 +1,88 @@
-import React, { useState } from 'react';
-import { FiSearch, FiArrowRight, FiBox, FiMapPin, FiX, FiSend, FiChevronDown, FiChevronUp, FiList, FiInfo } from 'react-icons/fi';
+import React, { useState, useEffect } from 'react';
+import { FiSearch, FiArrowRight, FiBox, FiMapPin, FiX, FiSend, FiChevronDown, FiChevronUp, FiList, FiInfo, FiCheckCircle, FiAlertCircle } from 'react-icons/fi';
+import { supabase } from '../supabaseClient';
 
-const vendorsData = [
-  {
-    id: 1,
-    name: 'Pride',
-    logo: '/assets/Partner-Brand-Logos/pride-logo.png', // Fallback to text if missing
-    abbr: 'PRD',
-    description: 'Premium frozen foods, naans, parathas, and ready-to-cook meat products.',
-    category: 'Frozen Foods',
-    location: 'National',
-    catalog: {
-      "Naans & Breads": ["Tandoori Naan", "Whole Wheat Naan", "Garlic Naan", "Plain Paratha", "Aloo Paratha", "Chapati", "Sheermaal", "Taftan", "Lahori Kulcha"],
-      "Samosas & Snacks": ["Aloo Samosa 12pc", "Aloo Samosa 30g", "Chicken Samosa 12pc", "Vegetable Samosa 50pc"],
-      "Frozen Meats": ["Chicken Tikka", "Chicken Tandoori", "Tikka Boti", "Behari Kabab", "Chapli Kabab", "Seekh Kabab"],
-      "Ready Meals": ["Bombay Biryani", "Yakhni Pulao", "Aloo Gosht", "Nihari", "Qorma", "Butter Chicken", "Fish Masala"]
-    }
-  },
-  {
-    id: 2,
-    name: 'Honest Foods',
-    abbr: 'HON',
-    description: 'High-quality chutneys, premium sauces, ketchup, pickles, and jams.',
-    category: 'Food & Beverage',
-    location: 'National',
-    catalog: {
-      "Chutneys & Dips": ["Imli Chutney", "Mint Chutney", "Pakora Chutney", "Green Chilli Chutney", "Mango Chutney"],
-      "Sauces & Ketchups": ["Chilli Garlic Sauce", "Tomato Ketchup", "Spicy Ketchup", "Habanero Ketchup", "Tartar Sauce", "French Dressing", "Pizza Sauce"],
-      "Gourmet Mayos": ["Chipotle Mayo", "Jalapeno Mayo", "Honey Mustard", "BBQ Mayo", "Garlic Mayo", "Peri Peri Mayo"],
-      "Marinades & Pastes": ["Malai Boti Marinade", "Tikka Marinade", "Bihari Kabab Marinade", "Garlic Paste", "Ginger Paste"],
-      "Pickles & Jams": ["Mixed Pickle", "Mango Pickle", "Mango Jam", "Strawberry Jam", "Mix Fruit Jam"]
-    }
-  },
-  {
-    id: 3,
-    name: 'Lays',
-    abbr: 'LAY',
-    description: 'Globally recognized potato chips and savory snacks in various authentic flavors.',
-    category: 'FMCG',
-    location: 'National',
-    catalog: {
-      "Potato Chips": ["French Cheese", "Masala", "Wavy Texas BBQ", "Wavy Yogurt & Herb", "Paprika", "Salt"]
-    }
-  },
-  {
-    id: 4,
-    name: 'Olivia',
-    abbr: 'OLI',
-    description: 'Leading personal care brand featuring hair colors, face washes, and cosmetics.',
-    category: 'Health & Beauty',
-    location: 'National',
-    catalog: {
-      "Hair Care": ["Black Hair Color", "Dark Brown Hair Color", "Burgundy Hair Color", "Hair Serum", "Bleaching Powder", "Hair Relaxer"],
-      "Skin Care & Creams": ["Neem & Lemon Face Wash", "Fair & Beautiful Face Wash", "Fairness Cream", "Bleach Cream", "Hair Removing Cream"],
-      "Lotions": ["Vanilla Fun Lotion", "Strawberry Fun Lotion", "Honey Almond Lotion", "Cleansing Lotion"]
-    }
-  },
-  {
-    id: 5,
-    name: 'Samsol',
-    abbr: 'SAM',
-    description: 'Renowned hair care and wellness products trusted across generations.',
-    category: 'Health & Beauty',
-    location: 'National',
-    catalog: {
-      "Hair Colors": ["Shade 39", "Shade 41", "Shade 42", "Shade 43", "Shade 44", "Shade 45"]
-    }
-  },
-  {
-    id: 6,
-    name: 'Laziza',
-    abbr: 'LAZ',
-    description: 'Authentic dessert mixes including Kheer, Ras Malai, and Falooda.',
-    category: 'Food & Beverage',
-    location: 'National',
-    catalog: {
-      "Kheer Mixes": ["Standard Kheer", "Pista/Coconut Kheer", "Almond/Saffron Kheer", "Gajar Kheer", "Vermicelli Kheer"],
-      "Traditional Desserts": ["Ras Malai Standard", "Ras Malai Pista", "Falooda Rabri", "Falooda Strawberry", "Sheer Khurma", "Shahi Tukra"]
-    }
-  },
-  {
-    id: 7,
-    name: 'Ambala Bakery',
-    abbr: 'AMB',
-    description: 'Traditional bakery items, cookies, cake rusks, and sweet delicacies.',
-    category: 'Food & Beverage',
-    location: 'National',
-    catalog: null // Example of missing data fallback
-  },
-  {
-    id: 8,
-    name: 'Memon Brothers',
-    abbr: 'MBR',
-    description: 'Premium whole spices, powdered spices, and traditional culinary ingredients.',
-    category: 'Spices & Culinary',
-    location: 'National',
-    catalog: null
-  },
-  {
-    id: 9,
-    name: 'Tang',
-    abbr: 'TNG',
-    description: 'Refreshing powdered fruit beverages in multiple citrus and tropical flavors.',
-    category: 'Beverages',
-    location: 'National',
-    catalog: null
-  },
-];
+
 
 const categories = ['All Categories', 'FMCG', 'Food & Beverage', 'Frozen Foods', 'Health & Beauty', 'Spices & Culinary', 'Beverages'];
 
 const Products = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState('All Categories');
+  const [vendors, setVendors] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   
   // Modal States
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [activeTab, setActiveTab] = useState('overview'); // 'overview' | 'catalog'
   const [expandedCategory, setExpandedCategory] = useState(null);
 
+  // Quote Form States
+  const [quoteData, setQuoteData] = useState({
+    fullName: '',
+    email: '',
+    company: '',
+    quantity: '',
+    skus: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null);
+
+  useEffect(() => {
+    const fetchVendors = async () => {
+      setIsLoading(true);
+      const { data, error } = await supabase.from('vendors').select('*');
+      if (error) {
+        console.error("Error fetching vendors:", error);
+      } else {
+        setVendors(data || []);
+      }
+      setIsLoading(false);
+    };
+    fetchVendors();
+  }, []);
+
+  const handleQuoteChange = (e) => {
+    setQuoteData({ ...quoteData, [e.target.name]: e.target.value });
+  };
+
+  const handleQuoteSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+
+    const { error } = await supabase
+      .from('quote_requests')
+      .insert([
+        { 
+          full_name: quoteData.fullName, 
+          email: quoteData.email, 
+          company: quoteData.company, 
+          quantity: quoteData.quantity, 
+          skus: quoteData.skus,
+          brand: selectedProduct.name
+        }
+      ]);
+
+    setIsSubmitting(false);
+
+    if (error) {
+      console.error('Error submitting quote:', error);
+      setSubmitStatus('error');
+    } else {
+      setSubmitStatus('success');
+      setQuoteData({ fullName: '', email: '', company: '', quantity: '', skus: '' });
+      setTimeout(() => {
+        setSubmitStatus(null);
+        handleCloseModal();
+      }, 3000);
+    }
+  };
+
   // Filter Logic
-  const filteredVendors = vendorsData.filter(vendor => {
-    const matchesSearch = vendor.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                          vendor.description.toLowerCase().includes(searchQuery.toLowerCase());
+  const filteredVendors = vendors.filter(vendor => {
+    const matchesSearch = vendor.name?.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                          vendor.description?.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesCategory = activeCategory === 'All Categories' || vendor.category === activeCategory;
     return matchesSearch && matchesCategory;
   });
@@ -207,7 +167,11 @@ const Products = () => {
           </div>
 
           {/* Grid Layout */}
-          {filteredVendors.length > 0 ? (
+          {isLoading ? (
+            <div className="flex justify-center py-24">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#0b2046]"></div>
+            </div>
+          ) : filteredVendors.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredVendors.map((vendor) => (
                 <div 
@@ -242,10 +206,6 @@ const Products = () => {
                     <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-50 text-[#0b2046] text-xs font-bold border border-blue-100/50">
                       <FiBox className="w-3.5 h-3.5" />
                       {vendor.category}
-                    </span>
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 text-slate-600 text-xs font-bold border border-slate-200/50">
-                      <FiMapPin className="w-3.5 h-3.5" />
-                      {vendor.location}
                     </span>
                   </div>
                 </div>
@@ -348,15 +308,6 @@ const Products = () => {
                           <p className="font-bold text-[#0b2046]">{selectedProduct.category}</p>
                         </div>
                       </div>
-                      <div className="flex items-center gap-4 bg-white p-4 rounded-xl border border-slate-100 shadow-sm">
-                        <div className="w-10 h-10 rounded-full bg-slate-50 border border-slate-200 flex items-center justify-center text-[#f7a800]">
-                          <FiMapPin className="w-4 h-4" />
-                        </div>
-                        <div>
-                          <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">Distribution Range</p>
-                          <p className="font-bold text-[#0b2046]">{selectedProduct.location}</p>
-                        </div>
-                      </div>
                     </div>
                   </div>
                 )}
@@ -383,14 +334,26 @@ const Products = () => {
                               {/* Accordion Body */}
                               {isOpen && (
                                 <div className="px-6 py-4 bg-slate-50 border-t border-slate-100">
-                                  <ul className="grid grid-cols-1 gap-2">
-                                    {products.map((product, idx) => (
-                                      <li key={idx} className="flex items-center gap-3 text-slate-600 text-sm py-1">
-                                        <div className="w-1.5 h-1.5 rounded-full bg-[#f7a800]"></div>
-                                        {product}
-                                      </li>
-                                    ))}
-                                  </ul>
+                                  <div className="overflow-x-auto">
+                                    <table className="w-full text-left border-collapse">
+                                      <thead>
+                                        <tr className="border-b border-slate-200 text-xs text-slate-400 uppercase tracking-wider">
+                                          <th className="pb-2 font-bold w-[45%]">Product Name</th>
+                                          <th className="pb-2 font-bold w-[35%]">Packing</th>
+                                          <th className="pb-2 font-bold w-[20%] text-right">Price</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody className="text-sm">
+                                        {products.map((product, idx) => (
+                                          <tr key={idx} className="border-b border-slate-100 last:border-0 hover:bg-slate-100/50 transition-colors">
+                                            <td className="py-2.5 font-medium text-[#0b2046] pr-2">{product.name}</td>
+                                            <td className="py-2.5 text-slate-500 text-xs pr-2">{product.packing}</td>
+                                            <td className="py-2.5 text-[#0b2046] font-bold text-right">${product.price}</td>
+                                          </tr>
+                                        ))}
+                                      </tbody>
+                                    </table>
+                                  </div>
                                 </div>
                               )}
                             </div>
@@ -415,26 +378,39 @@ const Products = () => {
                 <p className="text-slate-500">Found what you need in the catalog? Let us know the quantities to receive wholesale pricing.</p>
               </div>
 
-              <form className="space-y-5" onSubmit={(e) => { e.preventDefault(); alert("Quote requested! (This will connect to Supabase/Web3Forms later)"); handleCloseModal(); }}>
+              <form className="space-y-5" onSubmit={handleQuoteSubmit}>
+                {submitStatus === 'success' && (
+                  <div className="bg-green-50 text-green-700 p-3 rounded-xl flex items-center gap-2 border border-green-200 text-sm font-medium">
+                    <FiCheckCircle className="w-4 h-4 flex-shrink-0" />
+                    <p>Quote request sent successfully! We will be in touch.</p>
+                  </div>
+                )}
+                {submitStatus === 'error' && (
+                  <div className="bg-red-50 text-red-700 p-3 rounded-xl flex items-center gap-2 border border-red-200 text-sm font-medium">
+                    <FiAlertCircle className="w-4 h-4 flex-shrink-0" />
+                    <p>Failed to send quote. Please try again.</p>
+                  </div>
+                )}
+
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div>
                     <label className="block text-sm font-bold text-slate-700 mb-2">Full Name *</label>
-                    <input type="text" className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0b2046]/20 focus:border-[#0b2046] transition-all" placeholder="John Doe" required />
+                    <input type="text" name="fullName" value={quoteData.fullName} onChange={handleQuoteChange} className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0b2046]/20 focus:border-[#0b2046] transition-all" placeholder="John Doe" required />
                   </div>
                   <div>
                     <label className="block text-sm font-bold text-slate-700 mb-2">Email Address *</label>
-                    <input type="email" className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0b2046]/20 focus:border-[#0b2046] transition-all" placeholder="john@company.com" required />
+                    <input type="email" name="email" value={quoteData.email} onChange={handleQuoteChange} className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0b2046]/20 focus:border-[#0b2046] transition-all" placeholder="john@company.com" required />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div>
                     <label className="block text-sm font-bold text-slate-700 mb-2">Company Name</label>
-                    <input type="text" className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0b2046]/20 focus:border-[#0b2046] transition-all" placeholder="Your Business" />
+                    <input type="text" name="company" value={quoteData.company} onChange={handleQuoteChange} className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0b2046]/20 focus:border-[#0b2046] transition-all" placeholder="Your Business" />
                   </div>
                   <div>
                     <label className="block text-sm font-bold text-slate-700 mb-2">Est. Order Quantity *</label>
-                    <select className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0b2046]/20 focus:border-[#0b2046] transition-all text-slate-700 cursor-pointer" required defaultValue="">
+                    <select name="quantity" value={quoteData.quantity} onChange={handleQuoteChange} className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0b2046]/20 focus:border-[#0b2046] transition-all text-slate-700 cursor-pointer" required>
                       <option value="" disabled>Select quantity...</option>
                       <option value="1-5 Pallets">1-5 Pallets</option>
                       <option value="10+ Pallets">10+ Pallets</option>
@@ -446,12 +422,12 @@ const Products = () => {
 
                 <div>
                   <label className="block text-sm font-bold text-slate-700 mb-2">Specific SKUs / Required Products *</label>
-                  <textarea rows="4" className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0b2046]/20 focus:border-[#0b2046] transition-all resize-none" placeholder={`Browse the Product Catalog tab on the left and list your required ${selectedProduct.name} items here...`} required></textarea>
+                  <textarea name="skus" value={quoteData.skus} onChange={handleQuoteChange} rows="4" className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0b2046]/20 focus:border-[#0b2046] transition-all resize-none" placeholder={`Browse the Product Catalog tab on the left and list your required ${selectedProduct.name} items here...`} required></textarea>
                 </div>
 
-                <button type="submit" className="w-full mt-2 bg-[#0b2046] hover:bg-[#15346e] text-white font-bold text-lg py-4 px-8 rounded-xl transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl flex items-center justify-center gap-3 group">
-                  Submit Quote Request
-                  <FiSend className="w-5 h-5 text-[#f7a800] group-hover:translate-x-1 transition-transform" />
+                <button type="submit" disabled={isSubmitting} className="w-full mt-2 bg-[#0b2046] hover:bg-[#15346e] text-white font-bold text-lg py-4 px-8 rounded-xl transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl flex items-center justify-center gap-3 group disabled:opacity-70 disabled:cursor-not-allowed">
+                  {isSubmitting ? 'Sending...' : 'Submit Quote Request'}
+                  {!isSubmitting && <FiSend className="w-5 h-5 text-[#f7a800] group-hover:translate-x-1 transition-transform" />}
                 </button>
               </form>
             </div>
