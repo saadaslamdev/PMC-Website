@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { FiX, FiPlus, FiTrash2, FiSave } from 'react-icons/fi';
+import { FiX, FiPlus, FiTrash2, FiSave, FiUpload } from 'react-icons/fi';
+import { supabase } from '../../supabaseClient';
 
 const categoriesList = ['FMCG', 'Food & Beverage', 'Frozen Foods', 'Health & Beauty', 'Spices & Culinary', 'Beverages'];
 
@@ -9,6 +10,7 @@ const VendorEditor = ({ vendor, onSave, onClose }) => {
     abbr: vendor?.abbr || '',
     description: vendor?.description || '',
     category: vendor?.category || 'Food & Beverage',
+    logo: vendor?.logo || '',
   });
 
   // Ensure catalog is an object (it might be a JSON string from DB sometimes, or null)
@@ -20,6 +22,7 @@ const VendorEditor = ({ vendor, onSave, onClose }) => {
   const [catalog, setCatalog] = useState(initialCatalog);
   const [newSubcategoryName, setNewSubcategoryName] = useState('');
   const [isSaving, setIsSaving] = useState(false);
+  const [uploadingLogo, setUploadingLogo] = useState(false);
   const [confirmDialog, setConfirmDialog] = useState({ visible: false, message: '', title: '', onConfirm: null });
 
   // Lock background scroll when modal is open
@@ -32,6 +35,37 @@ const VendorEditor = ({ vendor, onSave, onClose }) => {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleLogoUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    setUploadingLogo(true);
+    
+    try {
+      const fileExt = file.name.split('.').pop();
+      const safeAbbr = formData.abbr ? formData.abbr.toLowerCase() : 'vendor';
+      const fileName = `${safeAbbr}-${Date.now()}.${fileExt}`;
+
+      const { error: uploadError } = await supabase.storage
+        .from('vendor-logos')
+        .upload(fileName, file);
+
+      if (uploadError) throw uploadError;
+
+      const { data } = supabase.storage
+        .from('vendor-logos')
+        .getPublicUrl(fileName);
+
+      setFormData({ ...formData, logo: data.publicUrl });
+      
+    } catch (error) {
+      console.error('Error uploading logo:', error);
+      alert('Error uploading logo. Make sure the "vendor-logos" bucket exists and is public.');
+    } finally {
+      setUploadingLogo(false);
+    }
   };
 
   const handleAddSubcategory = () => {
@@ -133,6 +167,39 @@ const VendorEditor = ({ vendor, onSave, onClose }) => {
                   <select name="category" value={formData.category} onChange={handleChange} className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none bg-white">
                     {categoriesList.map(cat => <option key={cat} value={cat}>{cat}</option>)}
                   </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-slate-700 mb-1">Vendor Logo</label>
+                  <div className="flex items-center gap-2 h-[42px]">
+                    {formData.logo && (
+                      <div className="w-10 h-10 shrink-0 bg-slate-50 border border-slate-200 rounded-lg overflow-hidden flex items-center justify-center p-1">
+                        <img src={formData.logo} alt="Logo" className="max-w-full max-h-full object-contain" />
+                      </div>
+                    )}
+                    <label className={`flex items-center justify-center gap-2 px-3 h-full border border-slate-300 rounded-lg cursor-pointer hover:bg-slate-50 transition-colors flex-grow bg-white text-sm ${uploadingLogo ? 'opacity-70 cursor-not-allowed' : ''}`}>
+                      <FiUpload className={uploadingLogo ? 'animate-bounce text-blue-500' : 'text-slate-500'} />
+                      <span className="text-slate-600 font-medium truncate">
+                        {uploadingLogo ? 'Uploading...' : (formData.logo ? 'Change' : 'Upload Logo')}
+                      </span>
+                      <input 
+                        type="file" 
+                        accept="image/*" 
+                        className="hidden" 
+                        onChange={handleLogoUpload}
+                        disabled={uploadingLogo}
+                      />
+                    </label>
+                    {formData.logo && (
+                      <button
+                        type="button"
+                        onClick={() => setFormData({ ...formData, logo: '' })}
+                        className="w-10 h-full shrink-0 flex items-center justify-center border border-red-200 bg-red-50 text-red-500 rounded-lg hover:bg-red-100 hover:text-red-600 transition-colors"
+                        title="Remove Logo"
+                      >
+                        <FiTrash2 className="w-4 h-4" />
+                      </button>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>

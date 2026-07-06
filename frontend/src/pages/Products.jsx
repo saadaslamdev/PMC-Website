@@ -184,9 +184,13 @@ const Products = () => {
 
                   <div className="relative z-10 flex-grow">
                     <div className="flex justify-between items-start mb-6">
-                      {/* Abbreviation Badge */}
-                      <div className="w-12 h-12 rounded-xl bg-[#0b2046]/5 flex items-center justify-center border border-[#0b2046]/10">
-                        <span className="font-black text-[#0b2046] tracking-wider text-sm">{vendor.abbr}</span>
+                      {/* Logo or Abbreviation Badge */}
+                      <div className="w-20 h-20 rounded-2xl bg-white flex items-center justify-center border border-slate-100 overflow-hidden shrink-0 shadow-md transform transition-transform group-hover:scale-105 z-10">
+                        {vendor.logo ? (
+                          <img src={vendor.logo} alt={`${vendor.name} logo`} className="w-full h-full object-contain p-2" />
+                        ) : (
+                          <span className="font-black text-[#0b2046] tracking-wider text-lg">{vendor.abbr}</span>
+                        )}
                       </div>
                       
                       {/* Interactive Arrow */}
@@ -289,8 +293,13 @@ const Products = () => {
                 {/* OVERVIEW TAB */}
                 {activeTab === 'overview' && (
                   <div className="animate-in fade-in slide-in-from-left-4 duration-300">
-                    <div className="w-16 h-16 rounded-2xl bg-[#0b2046]/5 flex items-center justify-center border border-[#0b2046]/10 mb-6">
-                      <span className="font-black text-[#0b2046] tracking-wider text-xl">{selectedProduct.abbr}</span>
+                    {/* Logo or Abbreviation Badge */}
+                    <div className="w-32 h-32 rounded-[2rem] bg-white flex items-center justify-center border border-slate-100 overflow-hidden shrink-0 shadow-lg mb-8 mx-auto md:mx-0">
+                      {selectedProduct.logo ? (
+                        <img src={selectedProduct.logo} alt={`${selectedProduct.name} logo`} className="w-full h-full object-contain p-4 drop-shadow-sm" />
+                      ) : (
+                        <span className="font-black text-[#0b2046] tracking-wider text-3xl">{selectedProduct.abbr}</span>
+                      )}
                     </div>
                     
                     <h2 className="text-3xl font-black text-[#0b2046] mb-4">{selectedProduct.name}</h2>

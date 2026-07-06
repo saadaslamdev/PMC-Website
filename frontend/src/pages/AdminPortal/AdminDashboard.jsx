@@ -460,7 +460,17 @@ const AdminDashboard = () => {
                       return (
                         <tr key={vendor.id}>
                           <td style={{ ...styles.td, fontWeight: 'bold', color: '#0b2046' }}>
-                            {vendor.name} <span style={{ fontSize: '0.75rem', color: '#64748b', marginLeft: '0.5rem' }}>{vendor.abbr}</span>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                              {vendor.logo ? (
+                                <img src={vendor.logo} alt={vendor.name} style={{ width: '36px', height: '36px', objectFit: 'contain', borderRadius: '6px', border: '1px solid #e2e8f0', padding: '2px', background: 'white' }} />
+                              ) : (
+                                <div style={{ width: '36px', height: '36px', borderRadius: '6px', background: '#f8fafc', border: '1px solid #e2e8f0', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.7rem', color: '#64748b' }}>{vendor.abbr}</div>
+                              )}
+                              <div>
+                                {vendor.name}
+                                <div style={{ fontSize: '0.75rem', color: '#64748b', fontWeight: '500', marginTop: '0.1rem' }}>{vendor.abbr}</div>
+                              </div>
+                            </div>
                           </td>
                           <td style={styles.td}>{vendor.category}</td>
                           <td style={styles.td}>
