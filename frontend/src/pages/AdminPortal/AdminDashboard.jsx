@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { supabase } from '../../supabaseClient';
 import { FiLogOut, FiUsers, FiSettings, FiBox, FiArrowLeft, FiRefreshCw, FiEdit2, FiTrash2, FiPlus, FiCheckCircle, FiAlertCircle, FiX } from 'react-icons/fi';
 import VendorEditor from './VendorEditor';
+import PlatformSettings from './PlatformSettings';
 
 const AdminDashboard = () => {
   const [user, setUser] = useState(null);
@@ -13,7 +14,7 @@ const AdminDashboard = () => {
   const navigate = useNavigate();
 
   // View States
-  const [activeView, setActiveView] = useState('dashboard'); // 'dashboard' | 'leads' | 'products'
+  const [activeView, setActiveView] = useState('dashboard'); // 'dashboard' | 'leads' | 'products' | 'settings'
 
   // Data States
   const [inquiries, setInquiries] = useState([]);
@@ -402,6 +403,7 @@ const AdminDashboard = () => {
             <h2 style={styles.cardTitle}><FiSettings /> Platform Settings</h2>
             <p style={styles.cardDesc}>Configure general website settings, update brand partner logos, and manage administrator access.</p>
             <button
+              onClick={() => setActiveView('settings')}
               style={styles.actionBtn(2)}
               onMouseEnter={() => setHoveredBtn(2)}
               onMouseLeave={() => setHoveredBtn(null)}
@@ -415,6 +417,10 @@ const AdminDashboard = () => {
           <button style={styles.backBtn} onClick={() => setActiveView('dashboard')}>
             <FiArrowLeft /> Back to Dashboard
           </button>
+
+          {activeView === 'settings' && (
+            <PlatformSettings showToast={showToast} />
+          )}
 
           {activeView === 'products' && (
             <div style={styles.tableContainer}>

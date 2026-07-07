@@ -62,10 +62,10 @@ const Contact = () => {
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:64px_64px] z-0"></div>
 
         <div className="container mx-auto px-6 relative z-10 text-center max-w-4xl">
-          <h1 className="text-4xl md:text-6xl font-black text-white mb-6 drop-shadow-lg tracking-tight">
+          <h1 className="text-4xl md:text-6xl font-black text-white mb-6 drop-shadow-lg tracking-tight fade-in" style={{ animationDelay: '0.1s' }}>
             Get in <span className="text-[#f7a800]">Touch</span>
           </h1>
-          <p className="text-xl text-slate-300 font-light leading-relaxed max-w-2xl mx-auto">
+          <p className="text-xl text-slate-300 font-light leading-relaxed max-w-2xl mx-auto fade-in" style={{ animationDelay: '0.3s' }}>
             Partner with PMC Imports for unparalleled North American distribution. Reach out to our team to discuss opportunities, logistics, or brand representation.
           </p>
         </div>

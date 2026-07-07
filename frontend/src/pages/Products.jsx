@@ -101,20 +101,24 @@ const Products = () => {
     <div className="pt-20 bg-slate-50 min-h-screen">
       
       {/* 1. Sleek Hero & Search Section */}
-      <section className="relative py-24 bg-[#0b2046] overflow-hidden">
+      <section className="relative py-24 bg-[#0b2046] overflow-hidden group">
         {/* Background Elements */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:40px_40px]"></div>
-        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent to-[#0b2046]/90 z-0"></div>
+        <div 
+          className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-30 transition-transform duration-[20s] group-hover:scale-105"
+          style={{ backgroundImage: "url('/assets/map-bg.png')" }}
+        ></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0b2046] via-[#0b2046]/80 to-transparent z-0"></div>
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:40px_40px] z-0"></div>
 
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-4xl mx-auto text-center mb-12">
-            <div className="inline-block px-4 py-1.5 rounded-full border border-[#f7a800]/30 bg-[#f7a800]/10 text-[#f7a800] text-sm font-bold uppercase tracking-widest mb-6 backdrop-blur-sm">
+            <div className="inline-block px-4 py-1.5 rounded-full border border-[#f7a800]/30 bg-[#f7a800]/10 text-[#f7a800] text-sm font-bold uppercase tracking-widest mb-6 backdrop-blur-sm fade-in">
               Vendor Directory
             </div>
-            <h1 className="text-4xl md:text-6xl font-black text-white mb-6 tracking-tight">
+            <h1 className="text-4xl md:text-6xl font-black text-white mb-6 tracking-tight fade-in" style={{ animationDelay: '0.1s' }}>
               Distribution <span className="text-[#f7a800]">Network</span>
             </h1>
-            <p className="text-xl text-slate-300 font-light leading-relaxed mb-10">
+            <p className="text-xl text-slate-300 font-light leading-relaxed mb-10 fade-in" style={{ animationDelay: '0.3s' }}>
               Browse our comprehensive portfolio of premium global brands and extensive product lines distributed across North America.
             </p>
 

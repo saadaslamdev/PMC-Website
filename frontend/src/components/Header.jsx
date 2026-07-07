@@ -21,6 +21,23 @@ const Header = () => {
       {/* Premium Gradient Top Bar */}
       <div className="fixed top-0 w-full h-1.5 bg-gradient-to-r from-[#0b2046] via-[#f7a800] to-[#0b2046] z-[60]"></div>
       
+      {/* Mobile Nav Overlay */}
+      <div className={`fixed inset-0 bg-white z-[45] flex flex-col items-center justify-center transition-all duration-500 lg:hidden ${isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
+        <ul className="flex flex-col items-center gap-8 text-center pt-16">
+          {navItems.map((item) => (
+            <li key={item}>
+              <Link 
+                to={item === 'Home' ? '/' : item === 'About Us' ? '/about' : `/${item.toLowerCase().replace(' ', '')}`} 
+                className="text-2xl font-bold text-[#0b2046] hover:text-[#f7a800] transition-colors"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {item}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+
       <div className="fixed top-1.5 left-0 w-full z-50 flex justify-center pointer-events-none">
         <header className={`pointer-events-auto w-full transition-all duration-500 ease-[cubic-bezier(0.2,0.8,0.2,1)] ${isScrolled ? 'max-w-7xl rounded-2xl bg-white/95 backdrop-blur-xl shadow-[0_8px_30px_rgba(0,0,0,0.12)] border border-slate-200/60 mt-2 py-2 mx-4' : 'max-w-full rounded-none bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-200/50 mt-0 py-4 mx-0'}`}>
           <div className="w-full max-w-7xl mx-auto px-6 flex justify-between items-center">
@@ -57,22 +74,6 @@ const Header = () => {
           {isMobileMenuOpen ? <FiX className="w-7 h-7" /> : <FiMenu className="w-7 h-7" />}
         </button>
 
-        {/* Mobile Nav Overlay */}
-        <div className={`fixed inset-0 bg-white z-40 flex flex-col items-center justify-center transition-all duration-500 lg:hidden ${isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
-          <ul className="flex flex-col items-center gap-8 text-center">
-            {navItems.map((item) => (
-              <li key={item}>
-                <Link 
-                  to={item === 'Home' ? '/' : item === 'About Us' ? '/about' : `/${item.toLowerCase().replace(' ', '')}`} 
-                  className="text-2xl font-bold text-[#0b2046] hover:text-[#f7a800] transition-colors"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {item}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
           </div>
         </header>
       </div>
