@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { FiSearch, FiArrowRight, FiBox, FiMapPin, FiX, FiSend, FiChevronDown, FiChevronUp, FiList, FiInfo, FiCheckCircle, FiAlertCircle } from 'react-icons/fi';
 import { supabase } from '../supabaseClient';
 
@@ -243,9 +244,9 @@ const Products = () => {
             <p className="text-[#0b2046]/80 text-lg font-medium max-w-2xl">Download our full SKU catalog or speak directly with our logistics team for wholesale inquiries.</p>
           </div>
           <div className="flex gap-4">
-            <button className="bg-[#0b2046] text-white font-bold py-4 px-8 rounded-full hover:bg-white hover:text-[#0b2046] transition-all duration-300 shadow-xl">
+            <Link to="/contact" className="bg-[#0b2046] text-white font-bold py-4 px-8 rounded-full hover:bg-white hover:text-[#0b2046] transition-all duration-300 shadow-xl inline-block text-center">
               Contact Sales
-            </button>
+            </Link>
           </div>
         </div>
       </section>
