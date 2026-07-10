@@ -91,8 +91,16 @@ const Contact = () => {
                 <FiPhone className="w-8 h-8 text-[#f7a800]" />
               </div>
               <h3 className="text-xl font-bold text-[#0b2046] mb-3">Call Us</h3>
-              <a href="tel:+12818549072" className="text-slate-600 font-medium hover:text-[#f7a800] transition-colors mb-1">+1 (281) 854-9072</a>
-              <a href="tel:+12818915559" className="text-slate-600 font-medium hover:text-[#f7a800] transition-colors">+1 (281) 891-5559</a>
+              <div className="space-y-3 w-full">
+                <div>
+                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-0.5">Junaid</p>
+                  <a href="tel:+12818549072" className="text-slate-600 font-medium hover:text-[#f7a800] transition-colors block text-sm sm:text-base">+1 (281) 854-9072</a>
+                </div>
+                <div className="border-t border-slate-100 pt-2">
+                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-0.5">Ahad Junaid</p>
+                  <a href="tel:+12818915559" className="text-slate-600 font-medium hover:text-[#f7a800] transition-colors block text-sm sm:text-base">+1 (281) 891-5559</a>
+                </div>
+              </div>
             </div>
 
             {/* Email Card */}
@@ -101,8 +109,16 @@ const Contact = () => {
                 <FiMail className="w-8 h-8 text-[#f7a800]" />
               </div>
               <h3 className="text-xl font-bold text-[#0b2046] mb-3">Email Us</h3>
-              <a href="mailto:info@pmcimportsllc.com" className="text-slate-600 font-medium hover:text-[#f7a800] transition-colors mb-1">info@pmcimportsllc.com</a>
-              <p className="text-slate-400 text-sm mt-2">Mon-Fri, 9am - 5pm CST</p>
+              <div className="space-y-3 w-full">
+                <div>
+                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-0.5">Ahad Junaid</p>
+                  <a href="mailto:info@pmcimportsllc.com" className="text-slate-600 font-medium hover:text-[#f7a800] transition-colors block text-sm sm:text-base">info@pmcimportsllc.com</a>
+                </div>
+                <div className="border-t border-slate-100 pt-2">
+                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-0.5">Junaid</p>
+                  <a href="mailto:junaid@pmcimportsllc.com" className="text-slate-600 font-medium hover:text-[#f7a800] transition-colors block text-sm sm:text-base">junaid@pmcimportsllc.com</a>
+                </div>
+              </div>
             </div>
           </div>
 

@@ -41,10 +41,10 @@ const Ecosystem = () => {
           <div className="group rounded-3xl overflow-hidden bg-white/[0.03] border border-white/10 backdrop-blur-xl shadow-2xl transition-all duration-500 hover:-translate-y-2 hover:bg-white/[0.05] hover:border-white/20 flex flex-col">
             <div className="relative h-64 overflow-hidden bg-slate-900">
               <div className="absolute inset-0 bg-[#0b2046]/40 group-hover:bg-transparent transition-colors duration-500 z-10"></div>
-              <img src="/assets/eco-fleet.png" alt="RA Fred Fleet" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+              <img src="/assets/eco-fleet.png" alt="RA Freight Fleet" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
             </div>
             <div className="p-8 flex-1 flex flex-col">
-              <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-[#f7a800] transition-colors duration-300">RA Fred Solution Logistic</h3>
+              <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-[#f7a800] transition-colors duration-300">RA Freight Solution Logistic</h3>
               <p className="text-slate-300 leading-relaxed mb-6 flex-1">
                 Our dedicated, in-house fleet ensuring direct-to-store delivery to over 400 shops. Total control over last-mile freshness.
               </p>

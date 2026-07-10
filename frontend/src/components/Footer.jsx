@@ -36,9 +36,10 @@ const Footer = () => {
               <span className="absolute -bottom-2 left-0 w-10 h-0.5 bg-[#f7a800]"></span>
             </h4>
             <ul className="space-y-3">
-              <li className="text-slate-400"><span className="font-semibold text-slate-300">Phone:</span> <a href="tel:+12818549072" className="hover:text-[#f7a800] transition-colors">+1 (281) 854-9072</a></li>
-              <li className="text-slate-400"><span className="font-semibold text-slate-300">Phone:</span> <a href="tel:+12818915559" className="hover:text-[#f7a800] transition-colors">+1 (281) 891-5559</a></li>
-              <li className="text-slate-400"><span className="font-semibold text-slate-300">Email:</span> <a href="mailto:info@pmcimportsllc.com" className="hover:text-[#f7a800] transition-colors">info@pmcimportsllc.com</a></li>
+              <li className="text-slate-400"><span className="font-semibold text-slate-300">Junaid (Phone):</span> <a href="tel:+12818549072" className="hover:text-[#f7a800] transition-colors">+1 (281) 854-9072</a></li>
+              <li className="text-slate-400"><span className="font-semibold text-slate-300">Ahad (Phone):</span> <a href="tel:+12818915559" className="hover:text-[#f7a800] transition-colors">+1 (281) 891-5559</a></li>
+              <li className="text-slate-400"><span className="font-semibold text-slate-300">Ahad (Email):</span> <a href="mailto:info@pmcimportsllc.com" className="hover:text-[#f7a800] transition-colors">info@pmcimportsllc.com</a></li>
+              <li className="text-slate-400"><span className="font-semibold text-slate-300">Junaid (Email):</span> <a href="mailto:junaid@pmcimportsllc.com" className="hover:text-[#f7a800] transition-colors">junaid@pmcimportsllc.com</a></li>
             </ul>
           </div>
         </div>

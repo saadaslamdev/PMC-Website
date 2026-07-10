@@ -90,7 +90,7 @@ const Services = () => {
           <div className="flex flex-col-reverse lg:flex-row items-center gap-16">
             <div className="lg:w-1/2">
               <h2 className="text-sm font-bold text-[#f7a800] uppercase tracking-[0.2em] mb-4">Vertical Integration</h2>
-              <h3 className="text-3xl md:text-5xl font-bold text-[#0b2046] mb-6 leading-tight">RA Fred Solution<br />Logistic Fleet</h3>
+              <h3 className="text-3xl md:text-5xl font-bold text-[#0b2046] mb-6 leading-tight">RA Freight Solution<br />Logistic Fleet</h3>
               <p className="text-lg text-slate-600 leading-relaxed mb-6">
                 Unlike many distributors that rely heavily on third parties, PMC operates its own dedicated logistics division. This guarantees full control over last-mile delivery, essential for maintaining the shelf life of fresh and frozen goods.
               </p>

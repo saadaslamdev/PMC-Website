@@ -24,7 +24,7 @@ const CTA = () => {
               <FiArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Link>
             <a href="tel:+12818549072" className="flex items-center gap-3 px-8 py-4 bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 text-white font-semibold rounded-xl transition-all duration-300">
-              +1 (281) 854-9072
+              Call Junaid: +1 (281) 854-9072
             </a>
           </div>
 

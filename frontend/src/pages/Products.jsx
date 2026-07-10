@@ -425,10 +425,11 @@ const Products = () => {
                     <label className="block text-sm font-bold text-slate-700 mb-2">Est. Order Quantity *</label>
                     <select name="quantity" value={quoteData.quantity} onChange={handleQuoteChange} className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0b2046]/20 focus:border-[#0b2046] transition-all text-slate-700 cursor-pointer" required>
                       <option value="" disabled>Select quantity...</option>
-                      <option value="1-5 Pallets">1-5 Pallets</option>
-                      <option value="10+ Pallets">10+ Pallets</option>
-                      <option value="Half Container">Half Container</option>
-                      <option value="Full Container">Full Container</option>
+                      <option value="10 Cases">10 Cases</option>
+                      <option value="25 Cases">25 Cases</option>
+                      <option value="1 Pallet">1 Pallet</option>
+                      <option value="5 Pallets">5 Pallets</option>
+                      <option value="10 Pallets">10 Pallets</option>
                     </select>
                   </div>
                 </div>

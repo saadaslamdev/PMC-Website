@@ -53,7 +53,7 @@ const Infrastructure = () => {
             </div>
             <h3 className="text-2xl font-bold text-[#0b2046] mb-3">12 States</h3>
             <p className="text-slate-600 leading-relaxed">
-              Direct fleet coverage delivering temperature-assured products leveraging our exclusive RA Fred Solution Logistic network.
+              Direct fleet coverage delivering temperature-assured products leveraging our exclusive RA Freight Solution Logistic network.
             </p>
           </div>
         </div>
