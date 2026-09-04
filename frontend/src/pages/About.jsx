@@ -118,14 +118,14 @@ const About = () => {
             {/* Ahad Junaid */}
             <div className="group rounded-3xl overflow-hidden bg-white border border-slate-100 shadow-xl transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
               <div className="h-[340px] bg-slate-100 relative">
-                <img src="/assets/team/Ahad Junaid.png" alt="Ahad Junaid - COO / CFO" className="w-full h-full object-cover object-top" />
+                <img src="/assets/team/Ahad Junaid.png" alt="Ahad Junaid - CEO / CFO" className="w-full h-full object-cover object-top" />
               </div>
               <div className="p-8 relative bg-white">
                 <div className="absolute -top-8 right-6 w-16 h-16 bg-[#0b2046] rounded-2xl flex items-center justify-center text-white shadow-lg rotate-3">
                   <FiMapPin className="w-8 h-8" />
                 </div>
                 <h4 className="text-2xl font-black text-[#0b2046] mb-1 mt-4">Ahad Junaid</h4>
-                <div className="text-sm font-bold text-[#f7a800] uppercase tracking-widest mb-4">COO / CFO</div>
+                <div className="text-sm font-bold text-[#f7a800] uppercase tracking-widest mb-4">CEO / CFO</div>
                 <p className="text-slate-600 text-sm leading-relaxed">
                   Modern expertise in global logistics and supply chain efficiency (ex-Amazon). Oversees financial operations and distribution throughout North America.
                 </p>
@@ -139,11 +139,15 @@ const About = () => {
               { name: 'Nazia Junaid', role: 'Warehouse & Data Analytics', desc: 'Leads inventory control and cold-storage data integrity at the HQ.' },
               { name: 'Sidra Ahad', role: 'Warehouse & Data Analytics', desc: 'Manages inbound/outbound flows and stock reconciliation.' },
               { name: 'Anousha Junaid', role: 'Purchase Analysis', desc: 'Supports coordination between vendors and retail partners.' },
-              { name: 'Muhammad Raahim', role: 'Logistics Operations', desc: 'Drives distribution expansion across US regions.' }
+              { name: 'Mohammad Raahim', role: 'Logistics Operations', desc: 'Drives distribution expansion across US regions.', image: '/assets/team/Mohammad Raahim.jpg' }
             ].map((member, idx) => (
-              <div key={idx} className="bg-white rounded-2xl p-6 border border-slate-100 shadow-md">
-                <div className="w-16 h-16 rounded-full bg-slate-200 mb-4 mx-auto flex items-center justify-center border-2 border-white shadow-sm overflow-hidden">
-                   <FiUsers className="w-6 h-6 text-slate-400" />
+              <div key={idx} className="bg-white rounded-2xl p-6 border border-slate-100 shadow-md flex flex-col items-center">
+                <div className="w-20 h-20 rounded-full bg-slate-100 mb-4 flex items-center justify-center border-2 border-[#f7a800]/40 shadow-sm overflow-hidden">
+                   {member.image ? (
+                     <img src={member.image} alt={member.name} className="w-full h-full object-cover object-top" />
+                   ) : (
+                     <FiUsers className="w-8 h-8 text-slate-400" />
+                   )}
                 </div>
                 <h5 className="text-lg font-bold text-[#0b2046] text-center mb-1">{member.name}</h5>
                 <div className="text-xs font-bold text-[#f7a800] uppercase text-center mb-3 tracking-wider">{member.role}</div>

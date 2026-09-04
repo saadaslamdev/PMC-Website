@@ -27,7 +27,7 @@ const Footer = () => {
               <li><Link to="/about" className="text-slate-400 hover:text-[#f7a800] transition-colors flex items-center gap-2"><span className="text-[#f7a800] text-xs">▸</span> About Us</Link></li>
               <li><Link to="/services" className="text-slate-400 hover:text-[#f7a800] transition-colors flex items-center gap-2"><span className="text-[#f7a800] text-xs">▸</span> Our Services</Link></li>
               <li><Link to="/products" className="text-slate-400 hover:text-[#f7a800] transition-colors flex items-center gap-2"><span className="text-[#f7a800] text-xs">▸</span> Product Catalog</Link></li>
-              <li><Link to="/team" className="text-slate-400 hover:text-[#f7a800] transition-colors flex items-center gap-2"><span className="text-[#f7a800] text-xs">▸</span> Leadership Team</Link></li>
+              <li><Link to="/about" className="text-slate-400 hover:text-[#f7a800] transition-colors flex items-center gap-2"><span className="text-[#f7a800] text-xs">▸</span> Leadership Team</Link></li>
             </ul>
           </div>
           <div>
